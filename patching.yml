@@ -1,0 +1,10 @@
+---
+- name: Aplicar actualizaciones non-kernel
+  hosts: "{{ HOSTS | default('all') }}"
+  become: true
+  gather_facts: false
+
+  tasks:
+    - name: Actualizar RHEL
+      include_role:
+        name: "rhel-patching"
