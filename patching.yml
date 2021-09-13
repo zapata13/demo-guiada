@@ -5,6 +5,17 @@
   gather_facts: false
 
   tasks:
-    - name: Actualizar RHEL
+    - name: Actualizar todo RHEL
       include_role:
         name: "rhel-patching"
+        apply:
+          tags:
+            - all
+      tags: all
+    - name: Actualizar seguridad RHEL
+      include_role:
+        name: "rhel-patching"
+        apply:
+          tags:
+            - security
+      tags: security
