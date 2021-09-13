@@ -5,17 +5,17 @@
   gather_facts: false
 
   tasks:
-    - name: Actualizar todo RHEL
-      include_role:
-        name: "rhel-patching"
-        apply:
-          tags:
-            - all
+    - name: Actualizar todos los paquetes excepto el kernel
+      yum:
+        name: '*'
+        state: latest
+        exclude: kernel*
       tags: all
-    - name: Actualizar seguridad RHEL
-      include_role:
-        name: "rhel-patching"
-        apply:
-          tags:
-            - security
+
+    - name: Actualizar todos los paquetes de seguridad excepto el kernel
+      yum:
+        name: '*'
+        state: latest
+        security: true
+        exclude: kernel*
       tags: security
