@@ -18,7 +18,7 @@
         </tr>
     </thead>
     <tbody>
-{% for linux_node in groups['all'] %}
+{% for linux_node in groups.all[1:] if hostvars[linux_node]['ansible_hostname'] is defined %}
         <tr>
             <td>{{ hostvars[linux_node]['ansible_hostname'] }}</td>
             <td>{{ hostvars[linux_node]['ansible_distribution'] }} {{hostvars[linux_node]['ansible_distribution_version']}}</td>
