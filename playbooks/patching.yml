@@ -9,7 +9,7 @@
       yum:
         name: '*'
         state: latest
-      tags: complete
+      when: update_rhel == "complete"
 
     - name: Actualizar todos los paquetes de seguridad excepto el kernel
       yum:
@@ -17,4 +17,4 @@
         state: latest
         security: true
         exclude: kernel*
-      tags: security
+      when: update_rhel == "security"
