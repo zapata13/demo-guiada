@@ -1,0 +1,30 @@
+---
+- name: Despliegue de aplicaciones en RHEL
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Asegurar de que el aplicativo no este vacio
+      assert:
+        that:
+          - "application != ''"
+
+    - name: Imprimir en terminal informacion del aplicativo a instalar
+      debug:
+        msg: "This Ansible Playbook will install {{application}}"
+
+    - name: Instalar aplicacion
+      dnf:
+        name: "{{application}}"
+        allow_downgrade: true
+      register: result
+
+    - name: Imprimir en terminal informacion del aplicativo
+      debug:
+        msg: "The application: {{application}} has been installed"
+      when: result.changed|bool
+
+    - name: Imprimir en terminal informacion del aplicativo
+      debug:
+        msg: "The application: {{application}} was already installed"
+      when: not result.changed|bool

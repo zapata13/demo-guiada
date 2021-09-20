@@ -5,12 +5,11 @@
   gather_facts: false
 
   tasks:
-    - name: Actualizar todos los paquetes excepto el kernel
+    - name: Actualizar todos los paquetes incluyendo el kernel
       yum:
         name: '*'
         state: latest
-        exclude: kernel*
-      tags: all
+      tags: complete
 
     - name: Actualizar todos los paquetes de seguridad excepto el kernel
       yum:
